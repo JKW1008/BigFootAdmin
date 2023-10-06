@@ -1,0 +1,15 @@
+{
+    "name": "woo/big-foot-admin",
+    "autoload": {
+        "psr-4": {
+            "Woo\\BigFootAdmin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "todendvv91",
+            "email": "todendvv91@gmail.com"
+        }
+    ],
+    "require": {}
+}
