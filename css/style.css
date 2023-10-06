@@ -1,0 +1,8 @@
+.container{
+    padding: 2% 
+}
+
+.container .mainInnerWrap{
+    width: 100%;
+    border: 1px solid black;
+}
