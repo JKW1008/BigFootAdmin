@@ -14,7 +14,9 @@
     $historyCourseArr = $course->historyCousreList();
     $natureCourseArr = $course->natureCousreList();
     $tourismCourseArr = $course->tourCousreList();
+
 ?>
+<script src="../js/course.js"></script>
 <style>
 button {
     color: black;
@@ -23,7 +25,7 @@ button {
 <div class="container">
     <div class="mainInnerWrap">
         <h1>코스</h1>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tab-pane"
                     type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">전체 코스</button>
@@ -42,26 +44,29 @@ button {
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tab4" data-bs-toggle="tab" data-bs-target="#tab4-pane" type="button"
-                    role="tab" aria-controls="tab4-pane" aria-selected="false">관광과 휴식</button>
+                    role="tab" aria-controls="tab4-pane" aria-selected="false">관광과 쇼핑</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
+            <!-- 모든 코스 -->
             <div class="tab-pane fade show active" id="tab-pane" role="tabpanel" aria-labelledby="tab" tabindex="0">
-                <main class="p-5">
-                    <h3>전체 코스 관리</h3>
+                <div class="py-5">
                     <table class="table table-border">
                         <colgroup>
-                            <col width="10%">
-                            <col width="15 %">
-                            <col width="25%">
-                            <col width="25%">
+                            <col width="5%">
                             <col width="15%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="25%">
                         </colgroup>
                         <tr>
-                            <th>코스 번호</th>
+                            <th>번호</th>
                             <th>코스 이름</th>
                             <th>위도</th>
                             <th>경도</th>
+                            <th>카테고리</th>
                             <th>QR code</th>
                             <th>관리</th>
                         </tr>
@@ -74,11 +79,12 @@ button {
                             <td><?= $row['course_name']; ?></td>
                             <td><?= $row['course_latitude']; ?></td>
                             <td><?= $row['course_longitude']; ?></td>
+                            <td><?= $row['table_name']; ?></td>
                             <td><?= $row['course_qr']; ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm btn_mem_edit"
+                                <button class="btn btn-primary btn-sm btn_allcourse_edit"
                                     data-idx="<?= $row['course_id']; ?>">수정</button>
-                                <button class="btn btn-danger btn-sm btn_mem_delete"
+                                <button class="btn btn-danger btn-sm btn_allcourse_delete"
                                     data-idx="<?= $row['course_id']; ?>">삭제</button>
                             </td>
                         </tr>
@@ -86,15 +92,205 @@ button {
             }
         ?>
                     </table>
+                </div>
+                <button class="btn btn-primary course_write">코스 넣기</button>
             </div>
+            <!-- 예술과 과학 -->
             <div class="tab-pane fade" id="tab1-pane" role="tabpanel" aria-labelledby="tab1" tabindex="0">
-                2</div>
-            <div class="tab-pane fade" id="tab2-pane" role="tabpanel" aria-labelledby="tab2" tabindex="0">
-                3</div>
-            <div class="tab-pane fade" id="tab3-pane" role="tabpanel" aria-labelledby="tab3" tabindex="0">4
+                <div class="py-5">
+                    <table class="table table-border">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="25%">
+                        </colgroup>
+                        <tr>
+                            <th>번호</th>
+                            <th>코스 이름</th>
+                            <th>위도</th>
+                            <th>경도</th>
+                            <th>카테고리</th>
+                            <th>QR code</th>
+                            <th>관리</th>
+                        </tr>
+                        <?php
+            foreach($artCourseArr AS $row){
+                // $row['create_at'] = substr($row['create_at'], 0, 16);
+        ?>
+                        <tr>
+                            <td><?= $row['idx']; ?></td>
+                            <td><?= $row['name']; ?></td>
+                            <td><?= $row['latitude']; ?></td>
+                            <td><?= $row['longitude']; ?></td>
+                            <td><?= $row['table_name']; ?></td>
+                            <td><?= $row['qr_code']; ?></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn_course_edit"
+                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-danger btn-sm btn_course_delete"
+                                    data-idx="<?= $row['idx']; ?>">삭제</button>
+                            </td>
+                        </tr>
+
+                        <?php
+            }
+        ?>
+                    </table>
+
+                </div>
+                <button class="btn btn-primary course_write">코스 넣기</button>
+
             </div>
-            <div class="tab-pane fade" id="tab4-pane" role="tabpanel" aria-labelledby="tab4" tabindex="0">5
+            <!-- 역사와 문화 -->
+            <div class="tab-pane fade" id="tab2-pane" role="tabpanel" aria-labelledby="tab2" tabindex="0">
+                <div class="py-5">
+                    <table class="table table-border">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="25%">
+                        </colgroup>
+                        <tr>
+                            <th>번호</th>
+                            <th>코스 이름</th>
+                            <th>위도</th>
+                            <th>경도</th>
+                            <th>카테고리</th>
+                            <th>QR code</th>
+                            <th>관리</th>
+                        </tr>
+                        <?php
+            foreach($historyCourseArr AS $row){
+                // $row['create_at'] = substr($row['create_at'], 0, 16);
+        ?>
+                        <tr>
+                            <td><?= $row['idx']; ?></td>
+                            <td><?= $row['name']; ?></td>
+                            <td><?= $row['latitude']; ?></td>
+                            <td><?= $row['longitude']; ?></td>
+                            <td><?= $row['table_name']; ?></td>
+                            <td><?= $row['qr_code']; ?></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn_course_edit"
+                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-danger btn-sm btn_course_delete"
+                                    data-idx="<?= $row['idx']; ?>">삭제</button>
+                            </td>
+                        </tr>
+                        <?php
+            }
+        ?>
+                    </table>
+                </div>
+                <button class="btn btn-primary course_write">코스 넣기</button>
+
+            </div>
+            <!-- 자연과 휴식 -->
+            <div class="tab-pane fade" id="tab3-pane" role="tabpanel" aria-labelledby="tab3" tabindex="0">
+                <div class="py-5">
+                    <table class="table table-border">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="25%">
+                        </colgroup>
+                        <tr>
+                            <th>번호</th>
+                            <th>코스 이름</th>
+                            <th>위도</th>
+                            <th>경도</th>
+                            <th>카테고리</th>
+                            <th>QR code</th>
+                            <th>관리</th>
+                        </tr>
+                        <?php
+            foreach($natureCourseArr AS $row){
+                // $row['create_at'] = substr($row['create_at'], 0, 16);
+        ?>
+                        <tr>
+                            <td><?= $row['idx']; ?></td>
+                            <td><?= $row['name']; ?></td>
+                            <td><?= $row['latitude']; ?></td>
+                            <td><?= $row['longitude']; ?></td>
+                            <td><?= $row['table_name']; ?></td>
+                            <td><?= $row['qr_code']; ?></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn_course_edit"
+                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-danger btn-sm btn_course_delete"
+                                    data-idx="<?= $row['idx']; ?>">삭제</button>
+                            </td>
+                        </tr>
+                        <?php
+            }
+        ?>
+                    </table>
+                </div>
+                <button class="btn btn-primary course_write">코스 넣기</button>
+
+            </div>
+            <!-- 관광과 쇼핑 -->
+            <div class="tab-pane fade" id="tab4-pane" role="tabpanel" aria-labelledby="tab4" tabindex="0">
+                <div class="py-5">
+                    <table class="table table-border">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="25%">
+                        </colgroup>
+                        <tr>
+                            <th>번호</th>
+                            <th>코스 이름</th>
+                            <th>위도</th>
+                            <th>경도</th>
+                            <th>카테고리</th>
+                            <th>QR code</th>
+                            <th>관리</th>
+                        </tr>
+                        <?php
+            foreach($tourismCourseArr AS $row){
+                // $row['create_at'] = substr($row['create_at'], 0, 16);
+        ?>
+                        <tr>
+                            <td><?= $row['idx']; ?></td>
+                            <td><?= $row['name']; ?></td>
+                            <td><?= $row['latitude']; ?></td>
+                            <td><?= $row['longitude']; ?></td>
+                            <td><?= $row['table_name']; ?></td>
+                            <td><?= $row['qr_code']; ?></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn_course_edit"
+                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-danger btn-sm btn_course_delete"
+                                    data-idx="<?= $row['idx']; ?>">삭제</button>
+                            </td>
+                        </tr>
+                        <?php
+            }
+        ?>
+                    </table>
+                </div>
+                <button class="btn btn-primary course_write">코스 넣기</button>
+
             </div>
         </div>
+
+
     </div>
 </div>
