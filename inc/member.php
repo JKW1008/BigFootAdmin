@@ -32,6 +32,15 @@
             }
         }
 
+        public function getInfo($id){
+            $sql = "SELECT * FROM people WHERE user_email=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":id", $id);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+
         public function total($paramArr){
 
             $where = "";

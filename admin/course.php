@@ -53,13 +53,12 @@ button {
                 <div class="py-5">
                     <table class="table table-border">
                         <colgroup>
-                            <col width="5%">
-                            <col width="15%">
-                            <col width="15%">
-                            <col width="15%">
+                            <col width="10%">
                             <col width="20%">
                             <col width="20%">
-                            <col width="25%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="10%">
                         </colgroup>
                         <tr>
                             <th>번호</th>
@@ -68,7 +67,6 @@ button {
                             <th>경도</th>
                             <th>카테고리</th>
                             <th>QR code</th>
-                            <th>관리</th>
                         </tr>
                         <?php
             foreach($allCourseArr AS $row){
@@ -81,12 +79,7 @@ button {
                             <td><?= $row['course_longitude']; ?></td>
                             <td><?= $row['table_name']; ?></td>
                             <td><?= $row['course_qr']; ?></td>
-                            <td>
-                                <button class="btn btn-primary btn-sm btn_allcourse_edit"
-                                    data-idx="<?= $row['course_id']; ?>">수정</button>
-                                <button class="btn btn-danger btn-sm btn_allcourse_delete"
-                                    data-idx="<?= $row['course_id']; ?>">삭제</button>
-                            </td>
+
                         </tr>
                         <?php
             }
@@ -129,8 +122,8 @@ button {
                             <td><?= $row['table_name']; ?></td>
                             <td><?= $row['qr_code']; ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm btn_course_edit"
-                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-primary btn-sm btn_course_edit" data-idx="<?= $row['idx']; ?>"
+                                    data-table-name="<?= $row['table_name']; ?>">수정</button>
                                 <button class="btn btn-danger btn-sm btn_course_delete"
                                     data-idx="<?= $row['idx']; ?>">삭제</button>
                             </td>
@@ -179,8 +172,8 @@ button {
                             <td><?= $row['table_name']; ?></td>
                             <td><?= $row['qr_code']; ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm btn_course_edit"
-                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-primary btn-sm btn_course_edit" data-idx="<?= $row['idx']; ?>"
+                                    data-table-name="<?= $row['table_name']; ?>">수정</button>
                                 <button class="btn btn-danger btn-sm btn_course_delete"
                                     data-idx="<?= $row['idx']; ?>">삭제</button>
                             </td>
@@ -227,8 +220,8 @@ button {
                             <td><?= $row['table_name']; ?></td>
                             <td><?= $row['qr_code']; ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm btn_course_edit"
-                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-primary btn-sm btn_course_edit" data-idx="<?= $row['idx']; ?>"
+                                    data-table-name="<?= $row['table_name']; ?>">수정</button>
                                 <button class="btn btn-danger btn-sm btn_course_delete"
                                     data-idx="<?= $row['idx']; ?>">삭제</button>
                             </td>
@@ -275,8 +268,8 @@ button {
                             <td><?= $row['table_name']; ?></td>
                             <td><?= $row['qr_code']; ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm btn_course_edit"
-                                    data-idx="<?= $row['idx']; ?>">수정</button>
+                                <button class="btn btn-primary btn-sm btn_course_edit" data-idx="<?= $row['idx']; ?>"
+                                    data-table-name="<?= $row['table_name']; ?>">수정</button>
                                 <button class="btn btn-danger btn-sm btn_course_delete"
                                     data-idx="<?= $row['idx']; ?>">삭제</button>
                             </td>

@@ -25,6 +25,7 @@
     // [longtitude] => 1 
     // [qr_code] => 
     // [mode] => input )
+    $idx = (isset($_POST['idx']) && $_POST['idx'] != '' && is_numeric($_POST['idx'])) ? $_POST['idx'] : '';
     $category = (isset($_POST['category']) && $_POST['category'] != '') ? $_POST['category'] : '';
     $name = (isset($_POST['name']) && $_POST['name'] != '') ? $_POST['name'] : '';
     $description = (isset($_POST['description']) && $_POST['description'] != '') ? $_POST['description'] : '';
@@ -39,6 +40,11 @@
     $qr_code = (isset($_POST['qr_code']) && $_POST['qr_code'] != '') ? $_POST['qr_code'] : '';
     $mode = (isset($_POST['mode']) && $_POST['mode'] != '') ? $_POST['mode'] : '';
 
+    $old_photo = (isset($_POST['old_photo']) && $_POST['old_photo'] != '') ? $_POST['old_photo'] : '';
+    $old_detail_photo = (isset($_POST['old_detail_photo']) && $_POST['old_detail_photo'] != '') ? $_POST['old_detail_photo'] : '';
+
+    $photo = '';
+    $detail_photo = '';
 
     if ($mode == "input") {
         if ($category == ''){
@@ -90,8 +96,7 @@
             die(json_encode(['result' => 'empty_qr_code']));
         }
         
-        $photo = '';
-        $detail_photo = '';
+     
         
         if(isset($_FILES['photo']) && $_FILES['photo']['name'] != ''){
             $tmparr = explode('.', $_FILES['photo']['name']);
@@ -135,5 +140,38 @@
 
         die(json_encode(['result' => 'course_input_success']));
 
+    } else if ($mode == "edit") {
+        if (isset($_FILES['photo']) && $_FILES['photo']['name'] != '') {
+            $new_photo = $_FILES['photo'];
+            $photo = $cour->photo_upload($name, $new_photo, $old_photo); // 이름으로 수정
+        }
+    
+        if (isset($_FILES['detail_photo']) && $_FILES['detail_photo']['name'] != '') {
+            $new_photo = $_FILES['detail_photo'];
+            $detail_photo = $cour->detail_photo_upload($name, $new_photo, $old_detail_photo); // 이름으로 수정
+        }
+        session_start();
+
+        $arr = [
+            'idx' => $idx,
+            'category' => $category,
+            'photo' => $photo,
+            'detail_photo' => $detail_photo,
+            'name' => $name,
+            'description' => $description,
+            'description2' => $description1,
+            'address' => $address,
+            'operating_hours' => $operating_hours,
+            'contact' => $contact,
+            'website' => $website,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'qr_code' => $qr_code,
+        ];
+
+
+        $cour->edit($category, $arr);
+
+        die(json_encode(['result' => 'course_edit_success']));
     }
 ?>

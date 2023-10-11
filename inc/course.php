@@ -70,5 +70,77 @@
             $stmt->execute();
         }
         
+
+        public function coursFind($table_name, $idx){
+            $sql = "SELECT * FROM $table_name WHERE idx=:idx";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":idx", $idx);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+
+        public function photo_upload($id, $new_photo, $old_photo = ''){
+            if ($old_photo != '') {
+                unlink("../data/course" ."/". $old_photo);
+                // unlink(PROFILE_DIR . $old_photo); //  삭제
+            }
+        
+            $tmparr = explode('.', $new_photo['name']);
+            $ext = end($tmparr);
+            $photo = $id . '.' . $ext;
+        
+            copy($new_photo['tmp_name'], "../data/course" ."/". $photo);
+        
+            return $photo;
+        }
+
+        public function detail_photo_upload($id, $new_photo, $old_photo = ''){
+            if ($old_photo != '') {
+                unlink("../data/detail" ."/". $old_photo);
+                // unlink(PROFILE_DIR . $old_photo); //  삭제
+            }
+        
+            $tmparr = explode('.', $new_photo['name']);
+            $ext = end($tmparr);
+            $photo = $id . '.' . $ext;
+        
+            copy($new_photo['tmp_name'], "../data/detail" ."/". $photo);
+        
+            return $photo;
+        }
+
+        public function edit($table, $marr) {
+            // 단방향 암호화
+            $sql = "UPDATE $table SET
+            photo = :photo,
+            detail_photo = :detail_photo,
+            name = :name,
+            description = :description,
+            description2 = :description2,
+            address = :address,
+            operating_hours = :operating_hours,
+            contact = :contact,
+            website = :website,
+            latitude = :latitude,
+            longitude = :longitude,
+            qr_code = :qr_code
+            WHERE idx = :idx"; 
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':idx', $marr['idx']);
+            $stmt->bindParam(':photo', $marr['photo']);
+            $stmt->bindParam(':detail_photo', $marr['detail_photo']);
+            $stmt->bindParam(':name', $marr['name']);
+            $stmt->bindParam(':description', $marr['description']);
+            $stmt->bindParam(':description2', $marr['description2']);
+            $stmt->bindParam(':address', $marr['address']);
+            $stmt->bindParam(':operating_hours', $marr['operating_hours']);
+            $stmt->bindParam(':contact', $marr['contact']);
+            $stmt->bindParam(':website', $marr['website']);
+            $stmt->bindParam(':latitude', $marr['latitude']);
+            $stmt->bindParam(':longitude', $marr['longitude']);
+            $stmt->bindParam(':qr_code', $marr['qr_code']);
+            $stmt->execute();
+        }
     }
 ?>
