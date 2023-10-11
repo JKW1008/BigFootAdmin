@@ -124,33 +124,30 @@ if (!isset($_SESSION['ses_id']) || $_SESSION['ses_id'] !== 'admin') {
             </div>
             <?php if($coursFindArr['detail_photo'] != ''){
                 echo '<img src="../data/detail/'.$coursFindArr['detail_photo'].'" class="w-25 mx-auto" alt="detail image">';
-            }else{
-                echo '
-                    <img src="./images/pngegg.png" id="f_preview" class="w-25 mx-auto" alt="profile image">
-                    ';
             }
             ?>
         </div>
-        <div class="mt-3 d-fle x flex-column gap-5">
+        <div class="mt-3 d-flex flex-column gap-5">
             <div>
                 <label for="main_photo" class="form-label">메인 이미지</label>
-                <input type="file" name="main_photo" id="main_photo" class="form-control" value="<?= $coursFindArr['photo'] ?>>
+                <input type="file" name="main_photo" id="main_photo" class="form-control"
+                    value="<?= $coursFindArr['photo'] ?>">
             </div>
             <?php if($coursFindArr['photo'] != ''){
-                echo '<img src="../data/course/'.$coursFindArr['photo'].'" class="w-25 mx-auto" alt="detail image" id="m_photo">';
+                echo '<img src="../data/course/'.$coursFindArr['photo'].'" class="w-25 mx-auto" alt="course image">';
             }
             ?>
         </div>
         <div class=" d-flex w-100 mt-3">
-                <div class="w-100">
-                    <label for="qr" class="form-label">QR code</label>
-                    <input type="text" name="qr" class="form-control" id="qr" placeholder="큐알 코드를 입력해 주세요."
-                        value="<?= $coursFindArr['qr_code']; ?>">
-                </div>
+            <div class="w-100">
+                <label for="qr" class="form-label">QR code</label>
+                <input type="text" name="qr" class="form-control" id="qr" placeholder="큐알 코드를 입력해 주세요."
+                    value="<?= $coursFindArr['qr_code']; ?>">
             </div>
-            <div class="mt-3 d-flex gap-2 mt-5">
-                <button id="btn_submit" class="btn btn-primary w-50" type="button">확인</button>
-                <button class="btn btn-secondary w-50" type="button" id="btn_list">목록</button>
-            </div>
+        </div>
+        <div class="mt-3 d-flex gap-2 mt-5">
+            <button id="btn_submit" class="btn btn-primary w-50" type="button">확인</button>
+            <button class="btn btn-secondary w-50" type="button" id="btn_list">목록</button>
+        </div>
     </form>
 </main>

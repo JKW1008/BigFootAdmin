@@ -113,8 +113,6 @@
         public function edit($table, $marr) {
             // 단방향 암호화
             $sql = "UPDATE $table SET
-            photo = :photo,
-            detail_photo = :detail_photo,
             name = :name,
             description = :description,
             description2 = :description2,
@@ -124,12 +122,22 @@
             website = :website,
             latitude = :latitude,
             longitude = :longitude,
-            qr_code = :qr_code
-            WHERE idx = :idx"; 
+            qr_code = :qr_code";
+        
+            // 사진 파일 업데이트 조건 추가
+            if (!empty($marr['photo'])) {
+                $sql .= ", photo = :photo";
+            }
+        
+            // 디테일 사진 파일 업데이트 조건 추가
+            if (!empty($marr['detail_photo'])) {
+                $sql .= ", detail_photo = :detail_photo";
+            }
+        
+            $sql .= " WHERE idx = :idx";
+        
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':idx', $marr['idx']);
-            $stmt->bindParam(':photo', $marr['photo']);
-            $stmt->bindParam(':detail_photo', $marr['detail_photo']);
             $stmt->bindParam(':name', $marr['name']);
             $stmt->bindParam(':description', $marr['description']);
             $stmt->bindParam(':description2', $marr['description2']);
@@ -140,7 +148,19 @@
             $stmt->bindParam(':latitude', $marr['latitude']);
             $stmt->bindParam(':longitude', $marr['longitude']);
             $stmt->bindParam(':qr_code', $marr['qr_code']);
+        
+            // 사진 파일 매개변수 추가
+            if (!empty($marr['photo'])) {
+                $stmt->bindParam(':photo', $marr['photo']);
+            }
+        
+            // 디테일 사진 파일 매개변수 추가
+            if (!empty($marr['detail_photo'])) {
+                $stmt->bindParam(':detail_photo', $marr['detail_photo']);
+            }
+        
             $stmt->execute();
         }
+        
     }
 ?>

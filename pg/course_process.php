@@ -63,25 +63,25 @@
             die(json_encode(['result' => "empty_description1"]));
         }
 
-        if ($address == ''){
-            die(json_encode(['result' => "empty_address"]));
-        }
+        // if ($address == ''){
+        //     die(json_encode(['result' => "empty_address"]));
+        // }
 
-        if ($operating_hours == ''){
-            die(json_encode(['result' => "empty_operating_hours"]));
-        }
+        // if ($operating_hours == ''){
+        //     die(json_encode(['result' => "empty_operating_hours"]));
+        // }
 
-        if ($contact == ''){
-            die(json_encode(['result' => "empty_contact"]));
-        }
+        // if ($contact == ''){
+        //     die(json_encode(['result' => "empty_contact"]));
+        // }
 
         if ($category == ''){
             die(json_encode(['result' => "empty_category"]));
         }
 
-        if ($website == ''){
-            die(json_encode(['result' => "empty_website"]));
-        }
+        // if ($website == ''){
+        //     die(json_encode(['result' => "empty_website"]));
+        // }
 
 
         if ($latitude == ''){
@@ -141,17 +141,21 @@
         die(json_encode(['result' => 'course_input_success']));
 
     } else if ($mode == "edit") {
+        $photo = $old_photo; // 기본적으로 기존 데이터를 유지
+        $detail_photo = $old_detail_photo; // 기본적으로 기존 데이터를 유지
+    
         if (isset($_FILES['photo']) && $_FILES['photo']['name'] != '') {
             $new_photo = $_FILES['photo'];
-            $photo = $cour->photo_upload($name, $new_photo, $old_photo); // 이름으로 수정
+            $photo = $cour->photo_upload($name, $new_photo, $old_photo); // 새 파일 업로드
         }
     
         if (isset($_FILES['detail_photo']) && $_FILES['detail_photo']['name'] != '') {
-            $new_photo = $_FILES['detail_photo'];
-            $detail_photo = $cour->detail_photo_upload($name, $new_photo, $old_detail_photo); // 이름으로 수정
+            $new_detail_photo = $_FILES['detail_photo'];
+            $detail_photo = $cour->detail_photo_upload($name, $new_detail_photo, $old_detail_photo); // 새 파일 업로드
         }
+    
         session_start();
-
+    
         $arr = [
             'idx' => $idx,
             'category' => $category,
@@ -168,10 +172,9 @@
             'longitude' => $longitude,
             'qr_code' => $qr_code,
         ];
-
-
+    
         $cour->edit($category, $arr);
-
+    
         die(json_encode(['result' => 'course_edit_success']));
     }
-?>
+    

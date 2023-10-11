@@ -108,22 +108,22 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("두번째 설명을 입력해 주세요");
             description1.focus();
           } 
-          else if (data.result == "empty_address") {
-            alert("코스 주소를 입력해 주세요");
-            addr.focus();
-          } 
-          else if (data.result == "empty_operating_hours") {
-            alert("운영시간을 입력해 주세요");
-            hour.focus();
-          } 
-          else if (data.result == "empty_contact") {
-            alert("공식 연락처를 입력해 주세요");
-            number.focus();
-          } 
-          else if (data.result == "empty_website") {
-            alert("사이트를 입력해 주세요");
-            web.focus();
-          } 
+          // else if (data.result == "empty_address") {
+          //   alert("코스 주소를 입력해 주세요");
+          //   addr.focus();
+          // } 
+          // else if (data.result == "empty_operating_hours") {
+          //   alert("운영시간을 입력해 주세요");
+          //   hour.focus();
+          // } 
+          // else if (data.result == "empty_contact") {
+          //   alert("공식 연락처를 입력해 주세요");
+          //   number.focus();
+          // } 
+          // else if (data.result == "empty_website") {
+          //   alert("사이트를 입력해 주세요");
+          //   web.focus();
+          // } 
           else if (data.result == "empty_latitude") {
             alert("위도를 입력해 주세요");
             lati.focus();

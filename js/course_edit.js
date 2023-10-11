@@ -76,12 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
   btn_submit.addEventListener("click", () => {
 
     const f = new FormData();
-    f.append("idx", params['idx'])
+    f.append("idx", params['idx']);
     f.append("category", choice_category.value);
-    f.append("photo", main_photo.files[0]);
-    f.append("old_photo", old_photo.value);
-    f.append("detail_photo", detail_photo.files[0]);
-    f.append("old_detail_photo", old_detail_photo.value);
+    f.append("photo", main_photo.files.length > 0 ? main_photo.files[0] : old_photo.value);
+    f.append("detail_photo", detail_photo.files.length > 0 ? detail_photo.files[0] : old_detail_photo.value);
     f.append("name", name.value);
     f.append("description", description.value);
     f.append("description1", description1.value);
