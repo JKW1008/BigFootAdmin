@@ -28,6 +28,7 @@
     $idx = (isset($_POST['idx']) && $_POST['idx'] != '' && is_numeric($_POST['idx'])) ? $_POST['idx'] : '';
     $category = (isset($_POST['category']) && $_POST['category'] != '') ? $_POST['category'] : '';
     $name = (isset($_POST['name']) && $_POST['name'] != '') ? $_POST['name'] : '';
+    $old_name = (isset($_POST['old_name']) && $_POST['old_name'] != '') ? $_POST['old_name'] : '';
     $description = (isset($_POST['description']) && $_POST['description'] != '') ? $_POST['description'] : '';
     $description1 = (isset($_POST['description1']) && $_POST['description1'] != '') ? $_POST['description1'] : '';
     $address = (isset($_POST['address']) && $_POST['address'] != '') ? $_POST['address'] : '';
@@ -163,6 +164,7 @@
             'photo' => $photo,
             'detail_photo' => $detail_photo,
             'name' => $name,
+            'old_name' => $old_name,
             'description' => $description,
             'description2' => $description1,
             'address' => $address,

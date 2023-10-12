@@ -33,7 +33,7 @@ if (!isset($_SESSION['ses_id']) || $_SESSION['ses_id'] !== 'admin') {
     <form name="input_form" method="post" enctype="multipart/form-data" autocomplete="off" action="">
         <input type="hidden" id="old_photo" value="<?= $coursFindArr['photo']; ?>">
         <input type="hidden" id="old_detail_photo" value="<?= $coursFindArr['detail_photo']; ?>">
-        <input type="hidden" name="mode" value="input">
+        <input type="hidden" id="old_name" value="<?= $coursFindArr['name']; ?>">
         <div class="w-100 mt-3">
             <label for="">카테고리</label>
             <select name="choice_category" id="choice_category" class="form-select" disabled>

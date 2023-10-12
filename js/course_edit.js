@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const choice_category = document.querySelector("#choice_category");
   const name = document.querySelector("#name");
+  const old_name = document.querySelector("#old_name");
   const description = document.querySelector("#description");
   const description1 = document.querySelector("#description1");
   const zipcode = document.querySelector("#zipcode");
@@ -74,13 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   btn_submit.addEventListener("click", () => {
-
+    console.log(name.value);
     const f = new FormData();
     f.append("idx", params['idx']);
     f.append("category", choice_category.value);
     f.append("photo", main_photo.files.length > 0 ? main_photo.files[0] : old_photo.value);
     f.append("detail_photo", detail_photo.files.length > 0 ? detail_photo.files[0] : old_detail_photo.value);
     f.append("name", name.value);
+    f.append("old_name", old_name.value);
     f.append("description", description.value);
     f.append("description1", description1.value);
     f.append("address", addr.value);

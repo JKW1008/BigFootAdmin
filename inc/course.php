@@ -173,12 +173,13 @@
         }
         
         public function coursedit($marr){
-            $sql = "UPDATE course SET course_name = :name, course_latitude = :latitude, course_longitude = :longitude, course_qr = :qr";
+            $sql = "UPDATE course SET course_name = :name, course_latitude = :latitude, course_longitude = :longitude, course_qr = :qr WHERE course_name = :cname";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':name', $marr['name']);
             $stmt->bindParam(':latitude', $marr['latitude']);
             $stmt->bindParam(':longitude', $marr['longitude']);
             $stmt->bindParam(':qr', $marr['qr_code']);
+            $stmt->bindParam(':cname', $marr['old_name']);
             $stmt->execute();
         }
     }
