@@ -136,6 +136,7 @@
             'qr_code' => $qr_code,
         ];
 
+        $cour->courseInput($arr);
         $cour->input($arr);
 
         die(json_encode(['result' => 'course_input_success']));
@@ -174,6 +175,7 @@
         ];
     
         $cour->edit($category, $arr);
+        $cour->coursedit($arr);
     
         die(json_encode(['result' => 'course_edit_success']));
     }

@@ -47,6 +47,16 @@
             return $stmt->fetchAll(); 
         }
 
+        public function courseInput($marr){
+            $sql = "INSERT INTO course (course_name, course_latitude, course_longitude, course_qr, table_name) VALUES (:name, :latitude, :longitude, :qr, :tname)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':name', $marr['name']);
+            $stmt->bindParam(':latitude', $marr['latitude']);
+            $stmt->bindParam(':longitude', $marr['longitude']);
+            $stmt->bindParam(':qr', $marr['qr_code']);
+            $stmt->bindParam(':tname', $marr['category']);
+            $stmt->execute();
+        }
         public function input($marr) {
             // $category 값을 추출
             $category = isset($marr['category']) ? $marr['category'] : '';
@@ -162,5 +172,14 @@
             $stmt->execute();
         }
         
+        public function coursedit($marr){
+            $sql = "UPDATE course SET course_name = :name, course_latitude = :latitude, course_longitude = :longitude, course_qr = :qr";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':name', $marr['name']);
+            $stmt->bindParam(':latitude', $marr['latitude']);
+            $stmt->bindParam(':longitude', $marr['longitude']);
+            $stmt->bindParam(':qr', $marr['qr_code']);
+            $stmt->execute();
+        }
     }
 ?>
